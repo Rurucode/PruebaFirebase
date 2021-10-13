@@ -1,7 +1,20 @@
+
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
-import { getFirestore, collection, addDoc, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
-  // TODO: Add SDKs for Firebase products that you want to use
+import { getFirestore, collection, addDoc, setDoc, doc, getDoc, getDocs,} from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
+
+//AÑADIR DATOS => collection, addDoc
+//LEER COLECCIÓN EN CONSOLA => collection, getDocs, query
+//LEER UN SOLO DOCUMENTO => doc, getDoc
+//AÑADIR O CREAR DATOS(INCLUYE COLECCIÓN + ID) => doc, setDoc
+//OBTENER VARIOS ELEMENTOS DE UNA COLECCIÓN => collection, query, where, getDocs
+//BORRAR DATOS => doc, deleteDoc
+
+
+
+
+// TODO: Add SDKs for Firebase products that you want to use
 
   // https://firebase.google.com/docs/web/setup#available-libraries
   // Your web app's Firebase configuration
@@ -13,13 +26,13 @@ import { getFirestore, collection, addDoc, setDoc, doc, getDoc } from "https://w
     messagingSenderId: "1039358143526",
     appId: "1:1039358143526:web:53123f8f35fda902904ae7"
   };
-// Initialize Firebase
+
+  // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 
 
-//   Agregar Datos
-
+// AGREGA DATOS
 // try {
 //   const docRef = await addDoc(collection(db, "users"), {
 //     first: "Ada",
@@ -31,35 +44,25 @@ const db = getFirestore(app)
 //   console.error("Error adding document: ", e);
 // }
 
+// LEE DATOS
+
+
+
+const querySnapshot = await getDocs(collection(db, "users"));
+querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+  console.log(doc.id, " => ", doc.data());
+});
 
 
 
 
-//   await setDoc(doc(db, "aaaaaaaaaa", "NY"), {
-//       name: "Nueva Yorks",
-//       state: "NY",
-//       country: "USA"
-//     });
+// const docRef = doc(db, "users", "nlyVnseiDLcPCXQuunCW");
+// const docSnap = await getDoc(docRef);
 
-
-
-
-
-    // const docRefs = doc(db, "aaaaaaaaaa", "NY");
-    // const docSnap = await getDoc(docRefs);
-    // if (docSnap.exists()) {
-    //     console.log("Document data:", docSnap.data());
-    // } else {
-    //     // doc.data() will be undefined in this case
-    //     console.log("No such document!");
-    // }
-
-
-
-
-    // Add a new document in collection "cities"
-    await setDoc(doc(db, "cities", "LA"), {
-      name: "Los Angeles",
-      state: "CA",
-      country: "USA"
-    });
+// if (docSnap.exists()) {
+//   console.log("Document data:", docSnap.data());
+// } else {
+//   // doc.data() will be undefined in this case
+//   console.log("No such document!");
+// }
